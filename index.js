@@ -55,9 +55,26 @@ app.post('/api/persons', (req, res) => {
   const person = req.body
   person.id = id
 
-  persons = persons.concat(person)
-  console.log(person)
-  res.json(person)
+  if (!person.name) {
+    return res.status(400).json({
+      error: "name is missing"
+    })
+
+  } else if (!person.number) {
+    return res.status(400).json({
+      error: "number is missing"
+    })
+
+  } else if (persons.some(p => p.name === person.name)) {
+    return res.status(400).json({
+      error: "name must be unique"
+    })
+
+  } else {
+    persons = persons.concat(person)
+    console.log(person)
+    res.json(person)
+  }
 
 })
 
