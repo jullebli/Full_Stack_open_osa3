@@ -1,0 +1,27 @@
+{
+  "name": "puhelinluettelon_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jullebli/Full_Stack_open_osa3.git"
+  },
+  "author": "Julia Bergman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jullebli/Full_Stack_open_osa3/issues"
+  },
+  "homepage": "https://github.com/jullebli/Full_Stack_open_osa3#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
