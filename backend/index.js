@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
 const Person = require('./models/person')
-const person = require('./models/person')
 
 morgan.token('post_data', function(req) {
   if (req.method === 'POST') {
@@ -17,8 +16,6 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms :post_data"))
 app.use(cors())
-
-
 
 app.get('/api/persons/:id', (req, res, next) => {
   Person.findById(req.params.id)
@@ -90,14 +87,18 @@ app.get('/api/persons', (req, res) => {
 })
 
 
-/*
+
 app.get('/info', (req, res) => {
-  const personsSize = persons.length
-  const date = new Date()
-  res.send(`<p>Phonebook has info for ${personsSize} people</p>
-  <p>${date}</p>`)
+  Person.countDocuments({}, (error, count) => {
+    if (error) {
+      next(error)
+    } else {
+      const date = new Date()
+      res.send(`<p>Phonebook has info for ${count} people</p>
+      <p>${date}</p>`)
+    }
+  })
 })
-*/
 
 const unknownEndpoint = (req, res) => {
   res.status(404).send({
