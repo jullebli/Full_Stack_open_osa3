@@ -16,16 +16,16 @@ const remove = removableObject => {
     return request.then(response => response.data)
 }
 
-/*
+
 const update = changedObject => {
     const request = axios.put(`${baseUrl}/${changedObject.id}`, changedObject)
     return request.then(response => response.data)
 }
-*/
+
 
 export default {
   getAll: getAll,
   create: create,
-  remove: remove
- // update: update
+  remove: remove,
+  update: update
 }

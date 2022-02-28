@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
 const Person = require('./models/person')
+const person = require('./models/person')
 
 morgan.token('post_data', function(req) {
   if (req.method === 'POST') {
@@ -55,11 +56,6 @@ app.post('/api/persons', (req, res) => {
       error: "number is missing"
     })
 
-  /*} else if (persons.some(p => p.name === body.name)) {
-    return res.status(400).json({
-      error: "name must be unique"
-    })
-*/
   } else {
     const person = new Person({
       name: body.name,
@@ -72,12 +68,27 @@ app.post('/api/persons', (req, res) => {
   }
 })
 
+app.put('/api/persons/:id', (req, res, next) => {
+  const body = req.body
+  const person = {
+    name: body.name,
+    number: body.number
+  }
+
+  Person.findByIdAndUpdate(req.params.id, person, {new: true})
+    .then(updatePerson => {
+      res.json(updatePerson)
+    })
+    .catch(error => next(error))
+})
+
 app.get('/api/persons', (req, res) => {
   Person.find({})
     .then(persons => {
       res.json(persons)
     })
 })
+
 
 /*
 app.get('/info', (req, res) => {

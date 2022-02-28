@@ -26,7 +26,7 @@ const App = () => {
     event.preventDefault()
 
     if (persons.some(e => e.name === newName)) {
-    /*  if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const person = persons.find(n => n.name === newName)
         const id = person.id
         const changedPerson = {...person, number: newNumber}
@@ -41,7 +41,8 @@ const App = () => {
                 setMessage(null)
               }, 3000)
             })
-            .catch(() => {
+            .catch((error) => {
+              console.log(error)
               setMessage(
                 `Information of ${changedPerson.name} has already been removed from server`
               )
@@ -53,7 +54,6 @@ const App = () => {
               setPersons(persons.filter(n => n.id !== id))
             })         
       }
-      */
 
     } else {
       const newPerson = { name: newName, number: newNumber }
